@@ -5,5 +5,6 @@
   "lastsemic": true,
   "-W058": false,      /* don't require parentheses for no-arg constructors */
   "-W054": false,      /* use Function constructor responsibly */
-  "-W033": false       /* let jscs deal with semicolons */
+  "-W033": false,       /* let jscs deal with semicolons */
+  "esversion": 6
 }
