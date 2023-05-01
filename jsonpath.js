@@ -4639,7 +4639,7 @@ Handlers.prototype._fns = {
   'member-child-identifier': function(component, partial) {
     var key = component.expression.value;
     var value = partial.value;
-    if (value instanceof Object && key in value) {
+    if (typeof value === 'object' && key in value) {
       return [ { value: value[key], path: partial.path.concat(key) } ]
     }
   },
@@ -4782,7 +4782,7 @@ function is_array(val) {
 
 function is_object(val) {
   // is this a non-array, non-null object?
-  return val && !(val instanceof Array) && val instanceof Object;
+  return val && !Array.isArray(val) && typeof val === 'object';
 }
 
 function traverser(recurse) {
@@ -4883,7 +4883,7 @@ JSONPath.prototype.parse = function(string) {
 
 JSONPath.prototype.parent = function(obj, string) {
 
-  assert.ok(obj instanceof Object, "obj needs to be an object");
+  assert.ok(typeof obj === 'object', "obj needs to be an object");
   assert.ok(_is_path(string), "we need a path");
 
   var node = this.nodes(obj, string)[0];
@@ -4893,7 +4893,7 @@ JSONPath.prototype.parent = function(obj, string) {
 
 JSONPath.prototype.apply = function(obj, string, fn) {
 
-  assert.ok(obj instanceof Object, "obj needs to be an object");
+  assert.ok(typeof obj === 'object', "obj needs to be an object");
   assert.ok(_is_path(string), "we need a path");
   assert.equal(typeof fn, "function", "fn needs to be function")
 
@@ -4914,7 +4914,7 @@ JSONPath.prototype.apply = function(obj, string, fn) {
 
 JSONPath.prototype.value = function(obj, path, value) {
 
-  assert.ok(obj instanceof Object, "obj needs to be an object");
+  assert.ok(typeof obj === 'object', "obj needs to be an object");
   assert.ok(_is_path(path), "we need a path");
 
   if (arguments.length >= 3) {
@@ -4926,7 +4926,7 @@ JSONPath.prototype.value = function(obj, path, value) {
 JSONPath.prototype._vivify = function (obj, string, value) {
   var self = this;
 
-  assert.ok(obj instanceof Object, "obj needs to be an object");
+  assert.ok(typeof obj === 'object', "obj needs to be an object");
   assert.ok(_is_path(string), "we need a path");
 
   var path = this._detectPath(string);
@@ -4958,7 +4958,7 @@ JSONPath.prototype._vivify = function (obj, string, value) {
 
 JSONPath.prototype.query = function (obj, string, count) {
 
-  assert.ok(obj instanceof Object, "obj needs to be an object");
+  assert.ok(typeof obj === 'object', "obj needs to be an object");
   assert.ok(_is_path(string), "we need a path");
 
   var results = this.nodes(obj, string, count)
@@ -4971,7 +4971,7 @@ JSONPath.prototype.query = function (obj, string, count) {
 
 JSONPath.prototype.paths = function(obj, string, count) {
 
-  assert.ok(obj instanceof Object, "obj needs to be an object");
+  assert.ok(typeof obj === 'object', "obj needs to be an object");
   assert.ok(_is_path(string), "we need a path");
 
   var results = this.nodes(obj, string, count)
@@ -4982,7 +4982,7 @@ JSONPath.prototype.paths = function(obj, string, count) {
 
 JSONPath.prototype.nodes = function(obj, string, count) {
 
-  assert.ok(obj instanceof Object, "obj needs to be an object");
+  assert.ok(typeof obj === 'object', "obj needs to be an object");
   assert.ok(_is_path(string), "we need a path");
 
   if (count === 0) return [];
