@@ -8,4 +8,9 @@ suite('delete', function() {
     JSONPath.delete(data, '$.a');
     assert.deepEqual(data, {b: 2, c: 3, z: {a: 100, b: 200}});
   });
+  test('delete 2', function() {
+    const data = {a: {d: 1}};
+    JSONPath.delete(data, '$.a.b.c');
+    assert.deepEqual(data, {a: {d: 1}});
+  });
 });
