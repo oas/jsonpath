@@ -69,4 +69,10 @@ suite('sugar', function() {
     assert.deepEqual(paths, [ ['$', '0'], ['$', '1'], ['$', '0', 'a'] ]);
   });
 
+  test('asd', function() {
+    var data = {a: undefined};
+    jp.value(data, '$.b[0].c', '5000')
+    assert.equal(data.a, undefined);
+    assert.equal(data.b[0].c, '5000');
+  });
 });
